@@ -1,11 +1,13 @@
 const path = require("path");
+// This will insert newly generated script file with contenthash into HTML.
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 	// Location of entry file or main file
 	entry: "./src/index.js",
 	output: {
 		// Name of the output file
-		filename: "main.js",
+		filename: "main.[contenthash].js",
 		// Path to the folder where file will be generated
 		path: path.resolve(__dirname, "dist"),
 	},
@@ -13,7 +15,7 @@ module.exports = {
 	// What mode to use? development or production
 	// production code is minified
 	mode: "development",
-	devtool: "source-map",
+	// devtool: "source-map",
 
 	module: {
 		rules: [
@@ -29,4 +31,10 @@ module.exports = {
 			},
 		],
 	},
+
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: "./src/template.html",
+		}),
+	],
 };
