@@ -18,11 +18,14 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.css$/i,
-				// css-loader takes the css styles and puts them into main.js
-				// style-loader takes the styles and injects them into the dom
-				// The order of execution is reverse. First css-loader is executed then style-loader.
-				use: ["style-loader", "css-loader"],
+				test: /\.scss$/i,
+				// The order of execution is reverse in use
+				// prettier-ignore
+				use: [
+          "style-loader", // 3. Injects styles into the DOM
+          "css-loader",   // 2. Converts css into commonjs
+          "sass-loader"   // 1. Converts scss to css
+        ],
 			},
 		],
 	},
