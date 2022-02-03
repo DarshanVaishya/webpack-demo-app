@@ -8,3 +8,7 @@ const alertService = new AlertService();
 const componentService = new ComponentService();
 
 run(alertService, componentService);
+
+const output = "Hello, world!";
+const test = " XD";
+console.log(output + test);
