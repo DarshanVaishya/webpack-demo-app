@@ -1,6 +1,7 @@
 const path = require("path");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = merge(common, {
 	mode: "development",
@@ -11,9 +12,22 @@ module.exports = merge(common, {
 		publicPath: "/",
 	},
 
-	// It does not create files in the dist folder
-	// Everything is stored in the memory
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: "./src/template.html",
+		}),
+	],
+
 	devServer: {
 		watchFiles: ["./src/*"],
+	},
+
+	module: {
+		rules: [
+			{
+				test: /\.s?css$/i,
+				use: ["style-loader", "css-loader", "sass-loader"],
+			},
+		],
 	},
 });
